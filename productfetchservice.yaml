@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: productfetch
+  labels:
+    app: productfetch
+    service: productfetch
+spec:
+  ports:
+  - port: 8080
+    name: http
+  selector:
+    app: productfetch
+  type: LoadBalancer
