@@ -16,30 +16,32 @@ spec:
     spec:
       containers:
       - name: productfetch
-        image: ghcr.io/tcardone/trc/productfetch:latest
+        #image: ghcr.io/tcardone/trc/productfetch:latest
+        #image: "us-west1-docker.pkg.dev/playground-s-11-b1f9bdab/gcp-repo/productfetch:latest"
+        image: <IMAGE_NAME>
         env:
         - name: DBURI
           value: "mongodb+srv://tobycardone:rYs0l6KFraKLTDh8@mongo-cluster.ixsvmmc.mongodb.net/?retryWrites=true&w=majority"
         - name: LISTENPORT
           value: "8080"
-        - name: SPLUNK_OTEL_AGENT
-            valueFrom:
-              fieldRef:
-                fieldPath: status.hostIP
-        - name: OTEL_EXPORTER_OTLP_ENDPOINT
-            value: "http://34.125.46.74:4317"
-        - name: OTEL_SERVICE_NAME
-            value: "productfetch"
-        - name: OTEL_RESOURCE_ATTRIBUTES
-            value: "deployment.environment=lab"
-        - name: SPLUNK_PROFILER_ENABLED
-            value: "true"
-        - name: SPLUNK_PROFILER_MEMORY_ENABLED
-            value: "true"
-        - name: SPLUNK_METRICS_ENABLED
-            value: "true"
+       # - name: SPLUNK_OTEL_AGENT
+       #     valueFrom:
+       #       fieldRef:
+       #         fieldPath: status.hostIP
+       # - name: OTEL_EXPORTER_OTLP_ENDPOINT
+       #     value: "http://34.125.46.74:4317"
+       # - name: OTEL_SERVICE_NAME
+       #     value: "productfetch"
+       # - name: OTEL_RESOURCE_ATTRIBUTES
+       #     value: "deployment.environment=lab"
+       # - name: SPLUNK_PROFILER_ENABLED
+       #     value: "true"
+       # - name: SPLUNK_PROFILER_MEMORY_ENABLED
+       #     value: "true"
+       # - name: SPLUNK_METRICS_ENABLED
+       #     value: "true"
         imagePullPolicy: Always
         ports:
         - containerPort: 8080
-      imagePullSecrets:
-          - name: dockerconfigjson-github-com
+      #imagePullSecrets:
+       #   - name: dockerconfigjson-github-com

@@ -16,12 +16,13 @@ spec:
     spec:
       containers:
       - name: nginx
-        image: ghcr.io/tcardone/trc/nginx:latest
+      #  image: ghcr.io/tcardone/trc/nginx:latest
+        image: "us-west1-docker.pkg.dev/playground-s-11-b1f9bdab/gcp-repo/nginx:latest"
         env:
         - name: productFetchUrl
-          value: "http://localhost:8080/"
+          value: "http://35.227.138.148:8080/"
         imagePullPolicy: Always
         ports:
         - containerPort: 80
-      imagePullSecrets:
-          - name: dockerconfigjson-github-com
+      #imagePullSecrets:
+      #    - name: dockerconfigjson-github-com
