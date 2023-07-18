@@ -1,0 +1,20 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: productfetch
+spec:
+  hosts:
+  - "*"
+  gateways:
+  - products-gateway
+  http:
+  - match:
+    - uri:
+        prefix: /productfetch
+    rewrite:
+      uri: ' '    
+    route:
+    - destination:
+        host: productfetch
+        port:
+          number: 8080

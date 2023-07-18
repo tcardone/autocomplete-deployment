@@ -16,12 +16,13 @@ spec:
     spec:
       containers:
       - name: productfetch
+        image: local/productfetch
         #image: ghcr.io/tcardone/trc/productfetch:latest
         #image: "us-west1-docker.pkg.dev/playground-s-11-b1f9bdab/gcp-repo/productfetch:latest"
-        image: <IMAGE_NAME>
+        #image: <IMAGE_NAME>
         env:
         - name: DBURI
-          value: "mongodb+srv://tobycardone:rYs0l6KFraKLTDh8@mongo-cluster.ixsvmmc.mongodb.net/?retryWrites=true&w=majority"
+          value: "mongodb+srv://dbuser:passth3p3as@mongo-cluster.ixsvmmc.mongodb.net/?retryWrites=true&w=majority"
         - name: LISTENPORT
           value: "8080"
        # - name: SPLUNK_OTEL_AGENT
@@ -40,7 +41,7 @@ spec:
        #     value: "true"
        # - name: SPLUNK_METRICS_ENABLED
        #     value: "true"
-        imagePullPolicy: Always
+        imagePullPolicy: Never
         ports:
         - containerPort: 8080
       #imagePullSecrets:
