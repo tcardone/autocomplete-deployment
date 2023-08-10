@@ -1,0 +1,46 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: productfetch
+  name: productfetch
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: productfetch
+  template:
+    metadata:
+      labels:
+        app: productfetch
+    spec:
+      containers:
+        - name: productfetch
+          image: registry.example.net:443/productfetch
+          imagePullPolicy: Always
+        
+          env:
+            - name: SPLUNK_OTEL_AGENT
+              valueFrom:
+                fieldRef:
+                  fieldPath: status.hostIP
+            - name: DBURI
+              value: mongodb+srv://dbuser:passth3p3as@mongo-cluster.ixsvmmc.mongodb.net/?retryWrites=true&w=majority
+            - name: LISTENPORT
+              value: "8080"
+            - name: OTEL_EXPORTER_OTLP_ENDPOINT
+              value: http://$(SPLUNK_OTEL_AGENT):4317
+            - name: OTEL_SERVICE_NAME
+              value: myapp
+            - name: OTEL_RESOURCE_ATTRIBUTES
+              value: deployment.environment=mycluster
+            - name: SPLUNK_PROFILER_ENABLED
+              value: "true"
+            - name: SPLUNK_PROFILER_MEMORY_ENABLED
+              value: "true"
+            - name: SPLUNK_METRICS_ENABLED
+              value: "true"
+          ports:
+          - containerPort: 8080
+      imagePullSecrets:
+      - name: registry-credential
